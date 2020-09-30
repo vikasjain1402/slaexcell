@@ -10,8 +10,6 @@ def maxmin(dated,maxi=True):
         maxminval = datetime.datetime(y, m, d, 00, 00, 00, 00000)
     return maxminval
 
-#st=datetime.datetime(2020,6,29,11,54,25)
-#et=datetime.datetime(2020,7,4,12,00,4)
 
 def workingdayscalc(sd,et):
 
