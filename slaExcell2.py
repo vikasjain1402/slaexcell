@@ -63,7 +63,7 @@ if dbugid is not None:
     print(final_data[debugid]['Pending'])
     print(final_data[debugid]['Resolved'].seconds)
     print(final_data[debugid]['Resolved'].days)
-    input()
+    input("press any key to resume")
 
 for i in final_data:
     totaltimeOutage=datetime.timedelta(0)
