@@ -57,17 +57,15 @@ for line in sh:
         InTCS=False
         continue
 
-
-print(final_data['INC6909422']['Duration'])
-print(final_data['INC6909422']['Pending'])
-print(final_data['INC6909422']['Resolved'].seconds)
-print(final_data['INC6909422']['Resolved'].days)
-print(final_data['INC6909422']['Resolved'].microseconds)
-input()
+debugid=None
+if dbugid is not None:
+    print(final_data[debugid]['Duration'])
+    print(final_data[debugid]['Pending'])
+    print(final_data[debugid]['Resolved'].seconds)
+    print(final_data[debugid]['Resolved'].days)
+    input()
 
 for i in final_data:
-    #if debug==i:
-     #   input(f"{final_data[i]}pause press enter")
     totaltimeOutage=datetime.timedelta(0)
 
     for j in final_data[i]['Duration']:
@@ -77,16 +75,11 @@ for i in final_data:
     for j in final_data[i]['Duration']:
         totaltimeOutageexcweekend+=workingdayscalc(j['st'],j['et'])
 
-    #print(i,"Total Outage={:.2f}".format(totaltimeOutage.days+totaltimeOutage.seconds/(3600*24)),
-     #     " # ",totaltimeOutageexcweekend ,end=" Pending\Resolved excludingweekend =")
 
 
     totaltime = 0
     for jj in final_data[i]['Pending']:
         totaltime+=workingdayscalc(jj['st'],jj['et'])
-        #if debug == i:
-         #   input(f"{totaltime}pause press enter")
-    #print(totaltime,end=" Pending\Resolved total =")
 
     totaltime1=datetime.timedelta(0)
     for jj in final_data[i]['Pending']:
