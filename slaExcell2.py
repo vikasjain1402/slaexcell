@@ -4,14 +4,13 @@ import datetime
 from supportings import  workingdayscalc
 from datalookup import tcsRoles
 
-direc=r"C:\Users\NK Jain\OneDrive\Desktop\VIKAS"
-filname="temp.xlsx"
-path=os.path.join(direc,filname)
-
+direc=os.getcwd()
+filname="TCS.xlsx"
 os.chdir(direc)
+print(f"Loading File :{filname}....")
 wb=openpyxl.load_workbook(filname)
-sh=wb.worksheets[0]
-
+sh=wb.worksheets[2]
+print("Done")
 InTCS=False
 pre_Inc=None
 final_data=dict()
@@ -57,14 +56,14 @@ for line in sh:
         InTCS=False
         continue
 
-debugid=None
+dbugid=None
 if dbugid is not None:
     print(final_data[debugid]['Duration'])
     print(final_data[debugid]['Pending'])
     print(final_data[debugid]['Resolved'].seconds)
     print(final_data[debugid]['Resolved'].days)
     input("press any key to resume")
-
+excellist=[]
 for i in final_data:
     totaltimeOutage=datetime.timedelta(0)
 
@@ -89,7 +88,15 @@ for i in final_data:
           totaltime1.days+totaltime1.seconds/(24*3600),
           totaltimeOutage.days+totaltimeOutage.seconds/(24*3600),
           totaltimeOutageexcweekend,totaltime,final_data[i]["Resolved"].days+final_data[i]["Resolved"].seconds/(24*3600),sep="#")
+    excellist.append([i,totaltime1.days+totaltime1.seconds/(24*3600),totaltimeOutage.days+totaltimeOutage.seconds/(24*3600),totaltimeOutageexcweekend,totaltime,final_data[i]["Resolved"].days+final_data[i]["Resolved"].seconds/(24*3600)])
+filname="TCS_output.xlsx"
+path=os.path.join(direc,filname)
 
-
-
-
+os.chdir(direc)
+print(f"\n Writing file {filname}...",end=" ")
+wb = openpyxl.Workbook()
+ws = wb.active
+for i in excellist:
+    ws.append(i)
+wb.save(filname)
+print("Done")
